@@ -9,5 +9,10 @@ namespace _Source.Core
         protected string _name;
         protected string _description;
         protected ItemsEnum _type;
+
+        public ItemsEnum GetItemType()
+        {
+            return _type;
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace _Source.Game
         private Inventory _inventory;
         [SerializeField] private GameObject _inventoryPrefab;
         private GameObject _inventoryObject;
+        [SerializeField] private GameObject _itemFactory;
 
         public void Init()
         {
@@ -17,8 +18,13 @@ namespace _Source.Game
             _inventoryObject = Instantiate(_inventoryPrefab);
             if (_inventoryObject.TryGetComponent(out InventoryView view))
             {
-                view.Init(_inventoryObject, _inventory);
+                view.Init(_inventoryObject, _inventory, _itemFactory.GetComponent<ItemFactory>());
             }
+        }
+
+        public Inventory GetInventory()
+        {
+            return _inventory;
         }
         
         public void ShowInventory()

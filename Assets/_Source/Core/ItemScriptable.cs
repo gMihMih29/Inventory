@@ -7,5 +7,15 @@ namespace _Source.Core.Items
   {
     [SerializeField] private ItemsEnum _type;
     [SerializeField] private GameObject _itemPrefab;
+
+    public ItemsEnum GetItemType()
+    {
+      return _type;
+    }
+   
+    public GameObject GetItemPrefab()
+    {
+      return _itemPrefab;
+    }
   }
 }

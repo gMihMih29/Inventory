@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ac7d41c03244539f6ff17bcb1b26fb, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: 
-  _type: 2
+  _type: 3
   _itemPrefab: {fileID: 414176144042442212, guid: 019584855a8bc29488997f6f63ecdd70, type: 3}

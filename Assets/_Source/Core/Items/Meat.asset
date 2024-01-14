@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ac7d41c03244539f6ff17bcb1b26fb, type: 3}
   m_Name: Meat
   m_EditorClassIdentifier: 
-  _type: 0
+  _type: 1
   _itemPrefab: {fileID: 414176144042442212, guid: a3031ec85ed830948b8a82611eee66e5, type: 3}
