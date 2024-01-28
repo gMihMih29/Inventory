@@ -32,7 +32,7 @@ namespace _Source.Game
                                 
                 if (obj.TryGetComponent(out ItemView view))
                 {
-                    obj.transform.parent = _inventoryObject.transform;
+                    obj.transform.parent = _inventoryObject.GetComponentInChildren<Canvas>().transform;
                     view.Init(obj, item);
                     view.UpdatePosition(_cells[i].transform.position);
                     ++i;
@@ -83,9 +83,9 @@ namespace _Source.Game
             Destroy(tmp);
             if (obj.TryGetComponent(out ItemView view))
             {
-                obj.transform.parent = _inventoryObject.transform;
+                obj.transform.parent = _inventoryObject.GetComponentInChildren<Canvas>().transform;
                 view.Init(obj, _inventory._items[index]);
-                view.UpdatePosition(_cells[index].transform.position);
+                view.UpdatePosition(_cells[index].transform.position + Vector3.up);
             }
         }
     }
