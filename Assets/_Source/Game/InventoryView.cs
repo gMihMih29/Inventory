@@ -10,11 +10,14 @@ namespace _Source.Game
 {
     public class InventoryView : MonoBehaviour
     {
+        [SerializeField]
+        private List<GameObject> _cells;
+        
         private Inventory _inventory;
         private GameObject _inventoryObject;
         private ItemFactory _itemFactory;
         private List<GameObject> _items;
-        private bool ininventory;
+
         public void Init(GameObject inventoryObject, Inventory inventory, ItemFactory itemFactory)
         {
             _inventory = inventory;
@@ -29,8 +32,9 @@ namespace _Source.Game
                                 
                 if (obj.TryGetComponent(out ItemView view))
                 {
+                    obj.transform.parent = _inventoryObject.transform;
                     view.Init(obj, item);
-                    view.UpdatePosition(new Vector3(i % 4, i / 4 , -100));
+                    view.UpdatePosition(_cells[i].transform.position);
                     ++i;
                 }
                 _items.Add(obj);
@@ -40,14 +44,13 @@ namespace _Source.Game
 
         public void Show()
         {
-            ininventory = true;
             UpdatePosition(new Vector3(0, 0, 0));
             int i = 0;
             foreach (var item in _items)
             {
                 if (item.TryGetComponent(out ItemView view))
                 {
-                    view.UpdatePosition(new Vector3(i % 4, i / 4 , -1));
+                    view.UpdatePosition(_cells[i].transform.position);
                     ++i;
                 }
             }
@@ -55,14 +58,13 @@ namespace _Source.Game
 
         public void Hide()
         {
-            ininventory = false;
             UpdatePosition(new Vector3(0, 0, -100));
             int i = 0;
             foreach (var item in _items)
             {
                 if (item.TryGetComponent(out ItemView view))
                 {
-                    view.UpdatePosition(new Vector3(i % 4, i / 4 , -100));
+                    view.UpdatePosition(_cells[i].transform.position);
                     ++i;
                 }
             }
@@ -81,8 +83,9 @@ namespace _Source.Game
             Destroy(tmp);
             if (obj.TryGetComponent(out ItemView view))
             {
+                obj.transform.parent = _inventoryObject.transform;
                 view.Init(obj, _inventory._items[index]);
-                view.UpdatePosition(new Vector3(index % 4, index / 4 , ininventory ? -1 : -100));
+                view.UpdatePosition(_cells[index].transform.position);
             }
         }
     }
