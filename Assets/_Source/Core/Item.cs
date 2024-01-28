@@ -1,3 +1,4 @@
+using _Source.Core.Items;
 using JetBrains.Annotations;
 
 namespace _Source.Core
@@ -7,5 +8,11 @@ namespace _Source.Core
         protected int _weight;
         protected string _name;
         protected string _description;
+        protected ItemsEnum _type;
+
+        public ItemsEnum GetItemType()
+        {
+            return _type;
+        }
     }
 }
