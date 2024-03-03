@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class DragScript : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandler
 {
@@ -23,7 +24,7 @@ public class DragScript : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragH
 
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
-        rec.anchoredPosition+= eventData.delta/canvas.scaleFactor;
+        transform.position = Camera.main.ScreenToWorldPoint(eventData.position) - 2 * Vector3.back;
         img.raycastTarget=false;
     }
 
