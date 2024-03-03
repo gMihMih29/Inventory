@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Meat
   m_EditorClassIdentifier: 
   _type: 1
-  _itemPrefab: {fileID: 414176144042442212, guid: a3031ec85ed830948b8a82611eee66e5, type: 3}
+  _itemPrefab: {fileID: 1896257282056141602, guid: 6bfac1469adb8014ab8dead341711e38, type: 3}

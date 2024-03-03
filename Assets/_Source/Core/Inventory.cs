@@ -10,7 +10,8 @@ namespace _Source.Core
     {
         private int _countFields;
         public List<Item> _items;
-        public event System.Action<int> OnItemChanged;
+        public event System.Action<int> OnItemStored;
+        public event System.Action<int, int> OnItemsSwapped;
 
         public Inventory(int countFields = 8)
         {
@@ -21,33 +22,21 @@ namespace _Source.Core
                 _items.Add(new PermanentItem(ItemsEnum.Empty));
             }
         }
-
-        public void ChangePositionOf(Item item, int newIndex)
+        
+        public void SwapItems(int index, int otherIndex)
         {
-            int oldIndex = _items.FindIndex(x => x == item);
-            if (_items[newIndex].GetItemType() == ItemsEnum.Empty)
-            {
-                _items[newIndex] = item;
-                _items[oldIndex] = new PermanentItem(ItemsEnum.Empty);
-            }
-            else
-            {
-                Item tmp = _items[newIndex];
-                _items[newIndex] = item;
-                _items[oldIndex] = tmp;
-            }
-            OnItemChanged?.Invoke(newIndex);
-            OnItemChanged?.Invoke(oldIndex);
+            (_items[index], _items[otherIndex]) = (_items[otherIndex], _items[index]);
+            OnItemsSwapped?.Invoke(index, otherIndex);
         }
 
-        public void AddItem(Item item)
+        public void AddNewItem(Item item)
         {
             for (int i = 0; i < _countFields; ++i)
             {
                 if (_items[i].GetItemType() == ItemsEnum.Empty)
                 {
                     _items[i] = item;
-                    OnItemChanged?.Invoke(i);
+                    OnItemStored?.Invoke(i);
                     return;
                 }
             }

@@ -10,34 +10,44 @@ namespace _Source.Game
 {
     public class InventoryView : MonoBehaviour
     {
-        [SerializeField]
-        private List<GameObject> _cells;
+        private List<GameObject> _slotsOnScene;
+        private List<GameObject> _itemsOnScene;
         
         private Inventory _inventory;
         private GameObject _inventoryObject;
         private ItemFactory _itemFactory;
-        private List<GameObject> _items;
+        private SlotFactory _slotFactory;
+        private Canvas _canvas;
 
-        public void Init(GameObject inventoryObject, Inventory inventory, ItemFactory itemFactory)
+        public void Init(GameObject inventoryObject, Inventory inventory, ItemFactory itemFactory, SlotFactory slotFactory, Canvas canvas)
         {
             _inventory = inventory;
             _inventoryObject = inventoryObject;
             _itemFactory = itemFactory;
-            _items = new List<GameObject>();
-            _inventory.OnItemChanged += UpdateItem;
-            int i = 0;
+            _slotFactory = slotFactory;
+            _canvas = canvas;
+            _itemsOnScene = new List<GameObject>();
+            _slotsOnScene = new List<GameObject>();
+            _inventory.OnItemStored += StoreItem;
+            _inventory.OnItemsSwapped += SwapItemsOnScene;
+            for (int i = 0; i < _inventory._items.Count; ++i)
+            {
+                _slotsOnScene.Add(_slotFactory.CreateSlot());
+                _slotsOnScene[i].transform.SetParent(inventoryObject.transform.GetChild(0));
+                _slotsOnScene[i].transform.localPosition = new Vector3(i % 4 * 2, - i / 4 * 2, 0);
+            }
+            int curSlot = 0;
             foreach (var item in _inventory._items)
             {
-                var obj = _itemFactory.CreateItem(item.GetItemType());
-                                
+                var obj = _itemFactory.CreateItem(item.GetItemType(), _canvas, this);          
                 if (obj.TryGetComponent(out ItemView view))
                 {
-                    obj.transform.parent = _inventoryObject.transform;
+                    obj.transform.SetParent(_slotsOnScene[curSlot].transform);
                     view.Init(obj, item);
-                    view.UpdatePosition(_cells[i].transform.position);
-                    ++i;
+                    view.UpdatePosition(Vector3.zero);
+                    ++curSlot;
                 }
-                _items.Add(obj);
+                _itemsOnScene.Add(obj);
             }
             Hide();
         }
@@ -46,11 +56,11 @@ namespace _Source.Game
         {
             UpdatePosition(new Vector3(0, 0, 0));
             int i = 0;
-            foreach (var item in _items)
+            foreach (var item in _itemsOnScene)
             {
                 if (item.TryGetComponent(out ItemView view))
                 {
-                    view.UpdatePosition(_cells[i].transform.position);
+                    view.UpdatePosition(Vector3.zero);
                     ++i;
                 }
             }
@@ -60,11 +70,11 @@ namespace _Source.Game
         {
             UpdatePosition(new Vector3(0, 0, -100));
             int i = 0;
-            foreach (var item in _items)
+            foreach (var item in _itemsOnScene)
             {
                 if (item.TryGetComponent(out ItemView view))
                 {
-                    view.UpdatePosition(_cells[i].transform.position);
+                    view.UpdatePosition(Vector3.zero);
                     ++i;
                 }
             }
@@ -72,20 +82,42 @@ namespace _Source.Game
         
         void UpdatePosition(Vector3 vector3)
         {
-            _inventoryObject.transform.position = vector3;
+            _canvas.transform.localPosition = vector3;
         }
 
-        private void UpdateItem(int index)
+        public void SwapItemsBySlots(GameObject slot1, GameObject slot2)
         {
-            var obj = _itemFactory.CreateItem(_inventory._items[index].GetItemType());
-            var tmp = _items[index];
-            _items[index] = obj;         
+            var index1 = _slotsOnScene.FindIndex(x => x == slot1);
+            var index2 = _slotsOnScene.FindIndex(x => x == slot2);
+            _inventory.SwapItems(index1, index2);
+        }
+
+        private void SwapItemsOnScene(int index, int other)
+        {
+            (_itemsOnScene[index], _itemsOnScene[other]) = (_itemsOnScene[other], _itemsOnScene[index]);
+            if (_itemsOnScene[index].TryGetComponent(out ItemView view))
+            {
+                _itemsOnScene[index].transform.SetParent(_slotsOnScene[index].transform);
+                view.UpdatePosition(Vector3.zero);
+            }
+            if (_itemsOnScene[other].TryGetComponent(out ItemView viewOther))
+            {
+                _itemsOnScene[other].transform.SetParent(_slotsOnScene[other].transform);
+                viewOther.UpdatePosition(Vector3.zero);
+            }
+        }
+
+        private void StoreItem(int index)
+        {
+            var obj = _itemFactory.CreateItem(_inventory._items[index].GetItemType(), _canvas, this);
+            var tmp = _itemsOnScene[index];
+            _itemsOnScene[index] = obj;         
             Destroy(tmp);
             if (obj.TryGetComponent(out ItemView view))
             {
-                obj.transform.parent = _inventoryObject.transform;
+                obj.transform.SetParent(_slotsOnScene[index].transform);
                 view.Init(obj, _inventory._items[index]);
-                view.UpdatePosition(_cells[index].transform.position);
+                view.UpdatePosition(Vector3.zero);
             }
         }
     }

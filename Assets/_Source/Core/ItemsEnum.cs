@@ -5,6 +5,7 @@ namespace _Source.Core.Items
     Empty,
     Meat,
     Wood,
-    Gold
+    Gold,
+    Stone
   }
 }

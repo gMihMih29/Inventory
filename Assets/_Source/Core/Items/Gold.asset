@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Gold
   m_EditorClassIdentifier: 
   _type: 3
-  _itemPrefab: {fileID: 414176144042442212, guid: 019584855a8bc29488997f6f63ecdd70, type: 3}
+  _itemPrefab: {fileID: 8326145459545736861, guid: 5432544f1ef05e94d879c65ab2434845, type: 3}

@@ -11,14 +11,24 @@ namespace _Source.Game
         [SerializeField] private GameObject _inventoryPrefab;
         private GameObject _inventoryObject;
         [SerializeField] private GameObject _itemFactory;
+        [SerializeField] private GameObject _slotFactory;
+        [SerializeField] private Canvas _inventoryCanvas;
 
         public void Init()
         {
             _inventory = new Inventory();
             _inventoryObject = Instantiate(_inventoryPrefab);
+            _inventoryObject.transform.SetParent(_inventoryCanvas.transform);
+            _inventoryObject.transform.localPosition = Vector3.zero;
             if (_inventoryObject.TryGetComponent(out InventoryView view))
             {
-                view.Init(_inventoryObject, _inventory, _itemFactory.GetComponent<ItemFactory>());
+                view.Init(
+                    _inventoryObject, 
+                    _inventory, 
+                    _itemFactory.GetComponent<ItemFactory>(), 
+                    _slotFactory.GetComponent<SlotFactory>(),
+                    _inventoryCanvas
+                );
             }
         }
 
