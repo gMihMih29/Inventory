@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using _Source.Core.Items;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,21 +11,28 @@ namespace _Source.Game
         [SerializeField]
         private List<ItemScriptable> _items;
         
-        public GameObject CreateItem(ItemsEnum itemType)
+        public GameObject CreateItem(ItemsEnum itemType, Canvas canvas, InventoryView view)
         {
+            GameObject obj = null;
             if (itemType == ItemsEnum.Empty)
             {
-                return Instantiate(_items[0].GetItemPrefab());
+                obj = Instantiate(_items[0].GetItemPrefab());
+                obj.AddComponent<DropOnItemScript>();
+                obj.GetComponent<DropOnItemScript>().Init(view);
+                return obj;
             }
 
-            GameObject obj = null;
+            
             foreach (var item in _items)
             {
                 if (item.GetItemType() == itemType)
                 {
                     obj = Instantiate(item.GetItemPrefab());
                     obj.AddComponent<EventTrigger>();
-                    obj.AddComponent<ItemDragHandler>();
+                    obj.AddComponent<DragScript>();
+                    obj.AddComponent<DropOnItemScript>();
+                    obj.GetComponent<DropOnItemScript>().Init(view);
+                    obj.GetComponent<DragScript>().Init(canvas);
                     break;
                 }
             }
