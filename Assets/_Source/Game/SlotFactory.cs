@@ -10,7 +10,6 @@ namespace _Source.Game
         public GameObject CreateSlot()
         {
             var obj = Instantiate(_slotPrefab);
-            obj.AddComponent<DropOnSlotScript>();
             return obj;
         }
     }

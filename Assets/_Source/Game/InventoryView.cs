@@ -42,6 +42,7 @@ namespace _Source.Game
                 var obj = _itemFactory.CreateItem(item.GetItemType(), _canvas, this);          
                 if (obj.TryGetComponent(out ItemView view))
                 {
+                    obj.transform.SetParent(_slotsOnScene[curSlot].transform);
                     view.Init(obj, item);
                     view.UpdatePosition(Vector3.zero);
                     ++curSlot;
@@ -81,7 +82,7 @@ namespace _Source.Game
         
         void UpdatePosition(Vector3 vector3)
         {
-            _inventoryObject.transform.localPosition = vector3;
+            _canvas.transform.localPosition = vector3;
         }
 
         public void SwapItemsBySlots(GameObject slot1, GameObject slot2)

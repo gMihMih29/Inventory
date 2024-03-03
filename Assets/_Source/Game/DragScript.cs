@@ -16,13 +16,14 @@ public class DragScript : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragH
     
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {
+        transform.parent.SetSiblingIndex(-1);
         tempColor.a=.5f;
         img.color=tempColor;
     }
 
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
-        rec.anchoredPosition+=eventData.delta / canvas.scaleFactor;
+        rec.anchoredPosition+= eventData.delta/canvas.scaleFactor;
         img.raycastTarget=false;
     }
 
