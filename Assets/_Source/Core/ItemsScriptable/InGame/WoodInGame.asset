@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23ac7d41c03244539f6ff17bcb1b26fb, type: 3}
-  m_Name: Gold
+  m_Name: WoodInGame
   m_EditorClassIdentifier: 
-  _type: 3
-  _itemPrefab: {fileID: 8326145459545736861, guid: 5432544f1ef05e94d879c65ab2434845, type: 3}
+  _type: 2
+  _itemPrefab: {fileID: 4835642468921055019, guid: eb7a8787c6362b44b9098e7cfb7cde2f, type: 3}

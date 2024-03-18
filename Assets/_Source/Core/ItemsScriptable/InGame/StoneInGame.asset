@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23ac7d41c03244539f6ff17bcb1b26fb, type: 3}
-  m_Name: Stone
+  m_Name: StoneInGame
   m_EditorClassIdentifier: 
   _type: 4
-  _itemPrefab: {fileID: 8187204199983174126, guid: 97890b62d6bf64748b93fff9a7c2e514, type: 3}
+  _itemPrefab: {fileID: 4835642468921055019, guid: 254f89d6c03a15a479fe508e4dbbecde, type: 3}

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23ac7d41c03244539f6ff17bcb1b26fb, type: 3}
-  m_Name: Wood
+  m_Name: MeatInventory
   m_EditorClassIdentifier: 
-  _type: 2
-  _itemPrefab: {fileID: 5657024655613475224, guid: 6d4928c72df6f524ca346d3cf8f33b9b, type: 3}
+  _type: 1
+  _itemPrefab: {fileID: 1896257282056141602, guid: 6bfac1469adb8014ab8dead341711e38, type: 3}
