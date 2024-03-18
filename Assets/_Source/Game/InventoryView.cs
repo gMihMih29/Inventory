@@ -120,5 +120,10 @@ namespace _Source.Game
                 view.UpdatePosition(Vector3.zero);
             }
         }
+        
+        public void RemoveItem(GameObject item)
+        {
+            _inventory.RemoveItem(_itemsOnScene.FindIndex(x => x == item));
+        }
     }
 }

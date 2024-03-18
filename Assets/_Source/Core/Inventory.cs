@@ -15,7 +15,7 @@ namespace _Source.Core
 
         public Inventory(int countFields = 8)
         {
-            _countFields = countFields;
+            _countFields = countFields > 16 ? 16 : countFields;
             _items = new List<Item>();
             for (int i = 0; i < countFields; ++i)
             {
@@ -40,7 +40,12 @@ namespace _Source.Core
                     return;
                 }
             }
-            throw new ArgumentException();
+        }
+        
+        public void RemoveItem(int index)
+        {
+            _items[index] = new PermanentItem(ItemsEnum.Empty);
+            OnItemStored?.Invoke(index);
         }
         
         public bool IsFull()
