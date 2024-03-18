@@ -13,7 +13,7 @@ namespace _Source.Core
         public event System.Action<int> OnItemStored;
         public event System.Action<int, int> OnItemsSwapped;
 
-        public Inventory(int countFields = 8)
+        public Inventory(int countFields)
         {
             _countFields = countFields > 16 ? 16 : countFields;
             _items = new List<Item>();

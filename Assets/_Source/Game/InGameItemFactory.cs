@@ -8,8 +8,7 @@ namespace _Source.Game
 {
   public class InGameItemFactory : MonoBehaviour
   {
-    [SerializeField]
-    private List<ItemScriptable> _items;
+    [SerializeField] private List<ItemScriptable> _items;
         
     public GameObject CreateItem(ItemsEnum itemType)
     {

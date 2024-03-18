@@ -8,14 +8,9 @@ namespace _Source.Core
 {
   public class GlobalInventory
   {
-    public List<Item> _items;
+    public List<Item> _items = new List<Item>();
     public event System.Action<int, Vector2> OnItemSpawned;
     public event System.Action<int> OnItemRemoved;
-
-    public GlobalInventory()
-    {
-      _items = new List<Item>();
-    }
 
     public void AddNewItem(Item item, Vector2 position)
     {

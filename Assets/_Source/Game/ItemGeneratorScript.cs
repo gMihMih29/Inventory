@@ -17,6 +17,7 @@ namespace _Source.Game
         [SerializeField] private float _deltaTime = 5;
         private float _lastUpdate;
 
+        // Start is called before the first frame update
         private void Start()
         {
             _lastUpdate = Time.time;

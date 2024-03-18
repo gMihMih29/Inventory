@@ -13,7 +13,7 @@ namespace _Source.Game
         [SerializeField] private GameObject _itemFactory;
         [SerializeField] private GameObject _slotFactory;
         [SerializeField] private Canvas _inventoryCanvas;
-        [SerializeField] private int _inventorySize = 8;
+        [SerializeField] private int _inventorySize;
         public void Init()
         {
             _inventory = new Inventory(_inventorySize);
