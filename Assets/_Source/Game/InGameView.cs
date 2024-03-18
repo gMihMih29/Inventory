@@ -55,5 +55,10 @@ namespace _Source.Game
             Destroy(_itemsOnScene[index]);         
             _itemsOnScene.RemoveAt(index);
         }
+        
+        public void RemoveItem(GameObject item)
+        {
+            _globalInventory.RemoveItem(_itemsOnScene.FindIndex(x => x == item));
+        }
     }
 }

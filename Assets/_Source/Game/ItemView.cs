@@ -4,24 +4,32 @@ using _Source.Core;
 using _Source.Core.Items;
 using UnityEngine;
 
-public class ItemView : MonoBehaviour
+namespace _Source.Game
 {
-    private Item _item;
-    private GameObject _itemObject;
-    
-    public void Init(GameObject itemObject, Item item)
+    public class ItemView : MonoBehaviour
     {
-        _item = item;
-        _itemObject = itemObject;
-    }
-    
-    public void UpdatePosition(Vector3 vector3)
-    {
-        transform.localPosition = vector3;
-    }
+        private Item _item;
+        private GameObject _itemObject;
 
-    public ItemsEnum GetItemType()
-    {
-        return _item.GetItemType();
+        public void Init(GameObject itemObject, Item item)
+        {
+            _item = item;
+            _itemObject = itemObject;
+        }
+
+        public void UpdatePosition(Vector3 vector3)
+        {
+            transform.localPosition = vector3;
+        }
+
+        public ItemsEnum GetItemType()
+        {
+            return _item.GetItemType();
+        }
+
+        public Item GetItem()
+        {
+            return _item;
+        }
     }
 }

@@ -7,7 +7,6 @@ namespace _Source.Game
     public class PlayerInput : MonoBehaviour
     {
         public float _speed;
-        public GameObject _player;
 
         // Start is called before the first frame update
         void Start()
@@ -22,22 +21,22 @@ namespace _Source.Game
             {
                 if (Input.GetKey(KeyCode.W))
                 {
-                    _player.transform.position += _speed * Time.deltaTime * (Vector3.up);
+                    transform.position += _speed * Time.deltaTime * (Vector3.up);
                 }
 
                 if (Input.GetKey(KeyCode.A))
                 {
-                    _player.transform.position += _speed * Time.deltaTime * (Vector3.left);
+                    transform.position += _speed * Time.deltaTime * (Vector3.left);
                 }
 
                 if (Input.GetKey(KeyCode.S))
                 {
-                    _player.transform.position += _speed * Time.deltaTime * (Vector3.down);
+                    transform.position += _speed * Time.deltaTime * (Vector3.down);
                 }
 
                 if (Input.GetKey(KeyCode.D))
                 {
-                    _player.transform.position += _speed * Time.deltaTime * (Vector3.right);
+                    transform.position += _speed * Time.deltaTime * (Vector3.right);
                 }
             }
         }

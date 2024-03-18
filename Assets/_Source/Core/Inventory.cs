@@ -42,5 +42,17 @@ namespace _Source.Core
             }
             throw new ArgumentException();
         }
+        
+        public bool IsFull()
+        {
+            for (int i = 0; i < _countFields; ++i)
+            {
+                if (_items[i].GetItemType() == ItemsEnum.Empty)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
