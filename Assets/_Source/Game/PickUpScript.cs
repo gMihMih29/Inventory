@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using _Source.Core.Items;
 using _Source.Game;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,6 +17,10 @@ namespace _Source.Game
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (other.gameObject.tag != "ItemOnGround")
+            {
+                return;
+            }
             var inventory = _inventorySpawner.GetComponent<InventorySpawner>().GetInventory();
             _mutex.WaitOne();
             if (!inventory.IsFull())

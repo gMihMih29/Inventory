@@ -22,17 +22,6 @@ namespace _Source.Game
             _itemsOnScene = new List<GameObject>();
             _globalInventory.OnItemSpawned += SpawnItem;
             _globalInventory.OnItemRemoved += RemoveItem;
-            
-            /*foreach (var item in _globalInventory._items)
-            {
-                var obj = _inGameItemFactory.CreateItem(item.GetItemType());
-                if (obj.TryGetComponent(out ItemView view))
-                {
-                    view.Init(obj, item);
-                    view.UpdatePosition(new Vector3(Random.Range(2, 7), Random.Range(2, 7), 0));
-                }
-                _itemsOnScene.Add(obj);
-            }*/
         }
 
         public void SpawnItem(int index, Vector2 position)

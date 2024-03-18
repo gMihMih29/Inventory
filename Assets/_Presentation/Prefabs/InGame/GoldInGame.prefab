@@ -95,9 +95,10 @@ GameObject:
   - component: {fileID: 8276205401336506458}
   - component: {fileID: 317748085028093402}
   - component: {fileID: 7329055895851866827}
+  - component: {fileID: 3751264806905783600}
   m_Layer: 0
   m_Name: GoldInGame
-  m_TagString: Untagged
+  m_TagString: ItemOnGround
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,3 +176,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7387936, y: 0.8367459}
   m_EdgeRadius: 0
+--- !u!50 &3751264806905783600
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4835642468921055019}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
