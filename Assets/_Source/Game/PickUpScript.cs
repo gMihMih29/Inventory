@@ -10,23 +10,27 @@ using UnityEngine;
 namespace _Source.Game
 {
     public class PickUpScript : MonoBehaviour
-    {
-        [SerializeField] private GameObject _inventorySpawner;
-        [SerializeField] private GameObject _worldStorage;
+    {  
+        private InGameView _worldStorage;
         private static Mutex _mutex = new Mutex();
 
+        public void Init(InGameView worldStorage)
+        {
+            _worldStorage = worldStorage;
+        }
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.tag != "ItemOnGround")
+            if (other.gameObject.tag != "Player")
             {
                 return;
             }
-            var inventory = _inventorySpawner.GetComponent<InventorySpawner>().GetInventory();
+            var inventory = other.transform.gameObject.GetComponentInChildren<InventorySpawner>().GetInventory();
             _mutex.WaitOne();
             if (!inventory.IsFull())
             {
-                inventory.AddNewItem(other.gameObject.GetComponent<ItemView>().GetItem());
-                _worldStorage.GetComponent<InGameView>().RemoveItem(other.gameObject);
+                inventory.AddNewItem(gameObject.GetComponent<ItemView>().GetItem());
+                _worldStorage.RemoveItem(gameObject);
             }
             _mutex.ReleaseMutex();
         }

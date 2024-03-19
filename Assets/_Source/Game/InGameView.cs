@@ -26,7 +26,7 @@ namespace _Source.Game
 
         public void SpawnItem(int index, Vector2 position)
         {
-            var obj = _inGameItemFactory.CreateItem(_globalInventory._items[index].GetItemType());
+            var obj = _inGameItemFactory.CreateItem(_globalInventory._items[index].GetItemType(),this);
             if (obj.TryGetComponent(out ItemView view))
             {
                 view.Init(obj, _globalInventory._items[index]);

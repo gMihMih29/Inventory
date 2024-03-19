@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _Source.Core.Items;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.PlayerLoop;
 
 namespace _Source.Game
 {
@@ -10,7 +11,7 @@ namespace _Source.Game
   {
     [SerializeField] private List<ItemScriptable> _items;
         
-    public GameObject CreateItem(ItemsEnum itemType)
+    public GameObject CreateItem(ItemsEnum itemType, InGameView worldStorage)
     {
       GameObject obj = null;
             
@@ -19,6 +20,8 @@ namespace _Source.Game
         if (item.GetItemType() == itemType)
         {
           obj = Instantiate(item.GetItemPrefab());
+          var pickUpScript = obj.GetComponent<PickUpScript>();
+          pickUpScript.Init(worldStorage);
           break;
         }
       }
