@@ -9,12 +9,6 @@ namespace _Source.Game
         public static bool InInventory = false;
         [SerializeField] private GameObject _inventorySpawner;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
         // Update is called once per frame
         void Update()
         {

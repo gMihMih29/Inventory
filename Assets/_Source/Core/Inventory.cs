@@ -13,9 +13,9 @@ namespace _Source.Core
         public event System.Action<int> OnItemStored;
         public event System.Action<int, int> OnItemsSwapped;
 
-        public Inventory(int countFields = 8)
+        public Inventory(int countFields)
         {
-            _countFields = countFields;
+            _countFields = countFields > 16 ? 16 : countFields;
             _items = new List<Item>();
             for (int i = 0; i < countFields; ++i)
             {
@@ -40,7 +40,24 @@ namespace _Source.Core
                     return;
                 }
             }
-            throw new ArgumentException();
+        }
+        
+        public void RemoveItem(int index)
+        {
+            _items[index] = new PermanentItem(ItemsEnum.Empty);
+            OnItemStored?.Invoke(index);
+        }
+        
+        public bool IsFull()
+        {
+            for (int i = 0; i < _countFields; ++i)
+            {
+                if (_items[i].GetItemType() == ItemsEnum.Empty)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

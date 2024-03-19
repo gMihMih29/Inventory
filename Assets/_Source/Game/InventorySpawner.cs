@@ -13,10 +13,10 @@ namespace _Source.Game
         [SerializeField] private GameObject _itemFactory;
         [SerializeField] private GameObject _slotFactory;
         [SerializeField] private Canvas _inventoryCanvas;
-
+        [SerializeField] private int _inventorySize;
         public void Init()
         {
-            _inventory = new Inventory();
+            _inventory = new Inventory(_inventorySize);
             _inventoryObject = Instantiate(_inventoryPrefab);
             _inventoryObject.transform.SetParent(_inventoryCanvas.transform);
             _inventoryObject.transform.localPosition = Vector3.zero;
@@ -51,6 +51,11 @@ namespace _Source.Game
             {
                 view.Hide();
             }
+        }
+
+        public InventoryView GetInventoryView()
+        {
+            return _inventoryObject.GetComponent<InventoryView>();
         }
     }
 }

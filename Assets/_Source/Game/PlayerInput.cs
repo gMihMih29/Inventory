@@ -7,38 +7,38 @@ namespace _Source.Game
     public class PlayerInput : MonoBehaviour
     {
         public float _speed;
-        public GameObject _player;
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
 
         // Update is called once per frame
         void Update()
         {
+            
+            Vector2 newPosition = transform.position;
+            
             if (!InventoryHandler.InInventory)
             {
                 if (Input.GetKey(KeyCode.W))
                 {
-                    _player.transform.position += _speed * Time.deltaTime * (Vector3.up);
+                    newPosition += _speed * Time.deltaTime * (Vector2.up);
                 }
 
                 if (Input.GetKey(KeyCode.A))
                 {
-                    _player.transform.position += _speed * Time.deltaTime * (Vector3.left);
+                    newPosition += _speed * Time.deltaTime * (Vector2.left);
                 }
 
                 if (Input.GetKey(KeyCode.S))
                 {
-                    _player.transform.position += _speed * Time.deltaTime * (Vector3.down);
+                    newPosition += _speed * Time.deltaTime * (Vector2.down);
                 }
 
                 if (Input.GetKey(KeyCode.D))
                 {
-                    _player.transform.position += _speed * Time.deltaTime * (Vector3.right);
+                    newPosition += _speed * Time.deltaTime * (Vector2.right);
                 }
+                transform.position = newPosition;
+                Quaternion rotation = new Quaternion();
+                rotation.eulerAngles = Vector3.zero;
+                transform.rotation = rotation;
             }
         }
     }
